@@ -1,6 +1,10 @@
 # Prerequisites
 *.d
 
+# Code blocks files
+*.cbp
+*.layout
+
 # Object files
 *.o
 *.ko
