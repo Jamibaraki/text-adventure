@@ -6,7 +6,7 @@
 #include "text-adventure.h"
 
 #define STRUCT_SIZE 10
-#define BUFFER_SIZE 10
+#define BUFFER_SIZE 32
 
 
 //TODO: drop? inventory?
@@ -63,6 +63,8 @@ int current_room = 1;
 
 int secondw = -1;
 
+int itemsLength = 0;
+
 char *blockmessage = "Not thataway!"; // "you cannot go that way, fool!"
 
 int highest_verb = examine;
@@ -85,7 +87,7 @@ int *tokens;
 
 int main(){
     bool game_on = true;
-    char str[1];
+
 
     //no room 0, using that as a null exit
     // exits - n,s,e,w
@@ -95,7 +97,7 @@ int main(){
     createRoom(3, "stairs", "The stinky stairs have a faint pong about them. Or is that you? Head west to descend.",0,0,0,1);
 
     createItem(1,2,3,"key","a small and golden key","a","it wouldn't agree with you","it smells metallic","do you need glasses?");
-
+    itemsLength = 2; //currently 1 higher than actual due to index not starting at 0..
 
     //myprint("Welcome to the incredible world of binkus");
     printf("Welcome to the incredible world of Binkus\n");
@@ -108,7 +110,7 @@ int main(){
         printf("You are carrying ");
         bool isCarrying = false;
         //go through items.. set is carrying true if find anything and print them.
-        int itemsLength = sprintf(str,"%d",sizeof(items)/sizeof(Item));
+
         for (int j = 0; j < itemsLength; j++) {
             if(items[j].isHeld == true ){
                 isCarrying = true;

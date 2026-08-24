@@ -4,6 +4,7 @@
 # Code blocks files
 *.cbp
 *.layout
+*.depend
 
 # Object files
 *.o
