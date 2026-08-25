@@ -25,3 +25,7 @@ int implementAction(int action);
 
 //moves to target room, or raises the appropriate objection
 int moveRoom( int target);
+
+
+//check if item is in inventory
+int isOwned( int target );

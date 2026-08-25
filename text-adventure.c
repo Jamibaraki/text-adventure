@@ -168,6 +168,12 @@ int main(){
     return 0;
 }
 
+//check if item is in inventory
+int isOwned( int target ){
+    target -= highest_verb;
+    return items[target].isHeld;
+}
+
 //try moving to target room
 int moveRoom( int target){
     if (target == 0 ) {
@@ -273,7 +279,12 @@ void processTokens(int* input){
         myprint( getItem(input[1])->smell );
         break;
     case eat:
-        myprint( getItem(input[1])->eat );
+        if( isOwned(input[1])){
+                myprint( getItem(input[1])->eat );
+        } else {
+            myprint("You don't have it");
+        }
+
         break;
 
     }
