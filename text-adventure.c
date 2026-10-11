@@ -90,14 +90,17 @@ int main(){
 
 
     //no room 0, using that as a null exit
+    // -1 is for locked door.. extend these ..-2 etc with specific conditions.
+    // these numbers can be dynamically replaced with exit numbers when doors are unlocked
     // exits - n,s,e,w
     createRoom(1, "hallway", "It's a long, dusty hall, with green and brown wallpaper. There's a door to the north and stairs to the east",2,0,3,0 );
     //createRoom(0, &"hallway");
     createRoom(2 , "kitchen", "Dull knives hang from the ceiling. A cat peers up at you. A door leads south.",0,1,0,0);
     createRoom(3, "stairs", "The stinky stairs have a faint pong about them. Or is that you? Head west to descend. North to go up to the landing.",4,0,0,1);
     createRoom(4,"Landing","A small landing. The stairs are to the south. There's a door to the west.",0,3,0,-1);
+    createRoom(5,"The Bedroom","A large double bed dominates the room. A window lets in a cool breeze. There's a cupboard here, too. An exit is to the east.",0,0,4,0);
 
-    createItem(1,2,3,"key","a small and golden key","a","it wouldn't agree with you","it smells metallic","do you need glasses?");
+    createItem(1,2,4,"key","a small and golden key","a","it wouldn't agree with you","it smells metallic","do you need glasses?");
     itemsLength = 2; //currently 1 higher than actual due to index not starting at 0..
 
     //myprint("Welcome to the incredible world of binkus");
@@ -270,6 +273,7 @@ void processTokens(int* input){
     case use:
         myprint("using somehow..");
         //use the target property to check if the item target is the current room
+        //printf("current room: %d item>target: %d \n",current_room,getItem(input[1])->target);
         if( getItem(input[1])->target == current_room ){
             implementAction( getItem(input[1])->target );
         }
@@ -297,11 +301,13 @@ void processTokens(int* input){
 
 //actually implement actions when conditions are met
 int implementAction(int action){
+    //printf("implement action. Action: %d\n",action);
     switch(action){
 
-    case 3:
+    case 4:
         //using the key to unlock a door
         printf("you unlock the door\n");
+        rooms[4].exits.w = 5;
         break;
     }
 
