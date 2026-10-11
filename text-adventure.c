@@ -94,7 +94,8 @@ int main(){
     createRoom(1, "hallway", "It's a long, dusty hall, with green and brown wallpaper. There's a door to the north and stairs to the east",2,0,3,0 );
     //createRoom(0, &"hallway");
     createRoom(2 , "kitchen", "Dull knives hang from the ceiling. A cat peers up at you. A door leads south.",0,1,0,0);
-    createRoom(3, "stairs", "The stinky stairs have a faint pong about them. Or is that you? Head west to descend.",0,0,0,1);
+    createRoom(3, "stairs", "The stinky stairs have a faint pong about them. Or is that you? Head west to descend. North to go up to the landing.",4,0,0,1);
+    createRoom(4,"Landing","A small landing. The stairs are to the south. There's a door to the west.",0,3,0,-1);
 
     createItem(1,2,3,"key","a small and golden key","a","it wouldn't agree with you","it smells metallic","do you need glasses?");
     itemsLength = 2; //currently 1 higher than actual due to index not starting at 0..
@@ -178,6 +179,8 @@ int isOwned( int target ){
 int moveRoom( int target){
     if (target == 0 ) {
         myprint(blockmessage);
+    } else if (target < 0){
+        myprint("There's a locked door there!");
     } else {
         current_room = target;
     }
