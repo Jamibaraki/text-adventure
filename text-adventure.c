@@ -300,11 +300,18 @@ void processTokens(int* input){
         break;
     case eat:
         if( isOwned(input[1])){
-                myprint( getItem(input[1])->eat );
+            myprint( getItem(input[1])->eat );
         } else {
             myprint("You don't have it");
         }
 
+        break;
+    case read:
+        if( isOwned(input[1])){
+            myprint( getItem(input[1])->read );
+        } else {
+            myprint("You don't have it");
+        }
         break;
 
     }
