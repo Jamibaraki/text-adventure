@@ -9,7 +9,7 @@
 #define BUFFER_SIZE 32
 
 
-//TODO: drop? inventory?
+//TODO: inventory?
 
 #define FOREACH_VERB(VERB) \
         VERB(get)   \
@@ -205,16 +205,16 @@ void processTokens(int* input){
 
         //handle input with just 1 valid token
         switch(input[0]){
-            case 0:
+            case get:
                 printf("Get what??\n");
                 break;
-            case 1:
+            case take:
                 printf("Take what exactly?\n");
                 break;
-            case 2:
+            case put:
                 printf("Put.. something??\n");
                 break;
-            case 3:
+            case eat:
                 printf("Eat.. what??\n");
                 break;
             case read:
@@ -266,7 +266,7 @@ void processTokens(int* input){
         printf("Getting or taking something\n");
         //check the target item is in the room
         if( getItem(input[1])->room == current_room ){
-            printf("it's here!\n");
+            printf("it's now yours!\n");
             struct item* this_item = &items[input[1]-highest_verb];
             this_item->isHeld = true;
             this_item->room = -1;
@@ -275,7 +275,6 @@ void processTokens(int* input){
         }
         break;
     case use:
-        //myprint("using somehow..");
         //use the target property to check if the item target is the current room
         //printf("current room: %d item>target: %d \n",current_room,getItem(input[1])->target);
         if( !getItem(input[1])->isHeld ){
