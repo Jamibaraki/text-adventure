@@ -108,6 +108,7 @@ int main(){
     printf("Welcome to the incredible world of Binkus\n");
 
     while( game_on == true ){
+        printf("\n");
         myprint(rooms[current_room].name);
         myprint(rooms[current_room].description);
 
@@ -136,7 +137,7 @@ int main(){
         }
 
 
-        myprint("What will you do?");
+        myprint("\nWhat will you do?");
         char input[BUFFER_SIZE];
 
         fgets( input, sizeof(input),stdin);
@@ -255,15 +256,14 @@ void processTokens(int* input){
         input[1] = temp;
     }
 
-    //OK, the above should work if we had two tokens, but not if there was just one valid token (or zero, dunno if that's possible here!
+
     //the big 2 word parser
     // MAIN ACTUAL VERB HANDLING AND IMPLEMENTATION
-    //probably should do a check on the getitem?? perhaps test for ownership first too and mention if it isn't present.
+    //could do a general possession check at start to save all the ..you don't have its..
     switch(input[0]){
     //get or take
     case get:
     case take:
-        printf("Getting or taking something\n");
         //check the target item is in the room
         if( getItem(input[1])->room == current_room ){
             printf("it's now yours!\n");
@@ -276,7 +276,6 @@ void processTokens(int* input){
         break;
     case use:
         //use the target property to check if the item target is the current room
-        //printf("current room: %d item>target: %d \n",current_room,getItem(input[1])->target);
         if( !getItem(input[1])->isHeld ){
             printf("You don't have it\n");
             break;
