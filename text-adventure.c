@@ -275,9 +275,14 @@ void processTokens(int* input){
         }
         break;
     case use:
-        myprint("using somehow..");
+        //myprint("using somehow..");
         //use the target property to check if the item target is the current room
         //printf("current room: %d item>target: %d \n",current_room,getItem(input[1])->target);
+        if( !getItem(input[1])->isHeld ){
+            printf("You don't have it\n");
+            break;
+        }
+
         if( getItem(input[1])->target == current_room ){
             implementAction( getItem(input[1])->target );
         }
@@ -316,6 +321,10 @@ int implementAction(int action){
 
     case 4:
         //using the key to unlock a door
+        if( rooms[4].exits.w == 5 ){
+            printf("But the door is already open.\n");
+            break;
+        }
         printf("you unlock the door\n");
         rooms[4].exits.w = 5;
         break;
