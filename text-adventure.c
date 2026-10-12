@@ -19,6 +19,7 @@
         VERB(eat)  \
         VERB(read)  \
         VERB(smell)  \
+        VERB(drop)  \
         VERB(examine)  \
         VERB(key)  \
 
@@ -225,6 +226,9 @@ void processTokens(int* input){
             case examine:
                 printf("Examine what??\n");
                 break;
+            case drop:
+                printf("Drop what?\n");
+                break;
             default:
                 printf("Do that to what?\n");
 
@@ -278,6 +282,12 @@ void processTokens(int* input){
             implementAction( getItem(input[1])->target );
         }
         //could possibly also check if the target property is an item
+        break;
+    case drop:
+        if( getItem(input[1])->isHeld){
+            getItem(input[1])->isHeld = 0;
+            getItem(input[1])->room = current_room;
+        }
         break;
     case examine:
         myprint( getItem(input[1])->description );
